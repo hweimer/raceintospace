@@ -973,7 +973,10 @@ int FailEval(char plr, int type, char *text, int val, int xtra)
         FNote = 0;
         Mev[STEP].StepInfo = 1700 + Mev[STEP].loc;
 
-        if (Mev[STEP].fgoto == -1) {
+        if (Mev[STEP].FName[2] == '0' && Mev[STEP].FName[3] == '0') {
+            FNote = 5;
+            Mev[STEP].trace = 0x7f;
+        } else if (Mev[STEP].fgoto == -1) {
             Mev[STEP].trace = 0x7F;
         } else {
             Mev[STEP].trace = STEP + 1;
