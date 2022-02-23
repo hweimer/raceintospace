@@ -69,6 +69,13 @@ add_custom_target(tag
 
 SET(CPACK_GENERATOR "DEB")
 SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "Raceintospace Team")
+# Dependencies obtained via
 # ldd src/game/raceintospace|sed -e 's/ =.*//g'|xargs dpkg -S|sed -e 's/:.*//g'|sort|uniq|sed -e ':a; N; $!ba; s/\n/, /g'
 SET(CPACK_DEBIAN_PACKAGE_DEPENDS "libasound2, libasyncns0, libbrotli1, libbsd0, libc6, libcaca0, libcairo2, libcom-err2, libdbus-1-3, libexpat1, libflac8, libfontconfig1, libfreetype6, libgcc-s1, libgcrypt20, libgpg-error0, libgssapi-krb5-2, libjsoncpp24, libk5crypto3, libkeyutils1, libkrb5-3, libkrb5support0, liblz4-1, liblzma5, libmd0, libncursesw6, libnsl2, libogg0, libopus0, libphysfs1, libpixman-1-0, libpng16-16, libpulse0, libsdl1.2debian, libslang2, libsndfile1, libstdc++6, libsystemd0, libtheora0, libtinfo6, libtirpc3, libuuid1, libvorbis0a, libvorbisenc2, libwrap0, libx11-6, libxau6, libxcb1, libxcb-render0, libxcb-shm0, libxdmcp6, libxext6, libxrender1, libzstd1, zlib1g")
+
+# Run RIS on boot
+SET(CPACK_INSTALL_COMMANDS "mkdir -p ${CMAKE_BINARY_DIR}/_CPack_Packages/Linux/DEB/raceintospace-0.1.1-Linux/etc/init.d/; install -m 755 ${CMAKE_SOURCE_DIR}/dist/vm/raceintospace ${CMAKE_BINARY_DIR}/_CPack_Packages/Linux/DEB/raceintospace-0.1.1-Linux/etc/init.d/")
+SET(CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA "${CMAKE_CURRENT_SOURCE_DIR}/dist/vm/postinst")
+
 include(CPack)
+
