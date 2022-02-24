@@ -1,0 +1,29 @@
+# Basic information
+Name "Race Into Space"
+OutFile "raceintospace.exe"
+InstallDir $PROGRAMFILES64\Raceintospace
+Page directory
+Page instfiles
+SetCompressor /SOLID lzma
+
+# VM Image has to go into $APPDATA to be user-writable
+Section "Copying files"
+SetOutPath "$APPDATA\Raceintospace"
+File Raceintospace.vdi
+File Raceintospace.vbox
+SetOutPath $INSTDIR
+File Raceintospace.ico
+File VirtualBox-6.1.32-149290-Win.exe
+SectionEnd
+
+Section "VirtualBox required"
+MessageBox MB_OK "Race Into Space requires the installation of VirtualBox to run. After VirtualBox has been installed, installation of the game will finish."
+ExecWait "$INSTDIR\VirtualBox-6.1.32-149290-Win.exe --silent"
+ExecWait "$PROGRAMFILES64\Oracle\VirtualBox\VBoxManage.exe registervm $APPDATA\Raceintospace\Raceintospace.vbox"
+# Disable VirtualBox notifications
+ExecWait "$PROGRAMFILES64\Oracle\VirtualBox\VBoxManage.exe setextradata global GUI/SuppressMessages all"
+# Shortcuts
+CreateDirectory "$SMPROGRAMS\Race Into Space"
+CreateShortCut "$SMPROGRAMS\Race Into Space\Race Into Space.lnk" "%ProgramFiles%\Oracle\VirtualBox\VBoxManage.exe" "startvm Raceintospace" "$INSTDIR\Raceintospace.ico"
+CreateShortcut "$desktop\Race Into Space.lnk" "%ProgramFiles%\Oracle\VirtualBox\VBoxManage.exe" "startvm Raceintospace" "$INSTDIR\Raceintospace.ico"
+SectionEnd
