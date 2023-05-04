@@ -225,12 +225,14 @@ int game_main_impl(int argc, char *argv[])
     OpenEmUp();                   // OPEN SCREEN AND SETUP GOODIES
 
     if (options.want_intro) {
-        Introd();
+      //        Introd();
     }
 
     ex = 0;
 
     while (ex == 0) {
+
+        for(int n=0; n<1000; n++) {
 
         MakeRecords();
 
@@ -251,13 +253,15 @@ int game_main_impl(int argc, char *argv[])
 
         music_start(M_LIFTOFF);
 
-        choice = MainMenuChoice();
+        choice = MAIN_NEW_GAME;
+        //        choice = MainMenuChoice();
 
         switch (choice) {
         case MAIN_NEW_GAME:  // New Game
 #ifdef ALLOW_PBEM
         case MAIN_PBEM_GAME:  // New Mail Game
 #endif // ALLOW_PBEM
+        newgame:
             LOAD = QUIT = 0;
             HARD1 = UNIT1 = 0;
 #ifdef ALLOW_PBEM
@@ -338,6 +342,8 @@ int game_main_impl(int argc, char *argv[])
             FadeOut(2, 10, 0, 0);
             break;
         }
+        }
+        ex = 1;
     }
 
     display::graphics.destroy();
@@ -698,6 +704,10 @@ restart:                              // ON A LOAD PROG JUMPS TO HERE
 
                         if (Data->Prestige[Prestige_MannedLunarLanding].Place != -1) {
                             if (MAIL != 0 && MAIL != 3) {
+                                printf("%i\n", Data->Prestige[Prestige_MannedLunarLanding].Place);
+                                fflush(stdout);
+                                return;
+
                                 UpdateRecords(1);
                                 NewEnd(Data->Prestige[Prestige_MannedLunarLanding].Place, Order[i].loc);
 
@@ -739,6 +749,9 @@ restart:                              // ON A LOAD PROG JUMPS TO HERE
 
         if (Data->Year == 77 && Data->Season == 1 && Data->Prestige[Prestige_MannedLunarLanding].Place == -1) {
             // nobody wins .....
+            printf("0.5\n");
+            fflush(stdout);
+            return;
             SpecialEnd();
             MailSwitchEndgame();
             return;

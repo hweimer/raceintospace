@@ -360,7 +360,8 @@ void Prefs(int where, int player)
             hum1 = 0, hum2 = 1;
             Data->Def.Lev1 = Data->Def.Ast1 = Data->Def.Ast2 = 0;
             Data->Def.Lev2 = 2;   // start computer level 3
-            Data->Def.Input = 2;  // Historical Model / Historical Roster
+            Data->Def.Input = 2;  // Historical Model / Historical Roster;
+            //            Data->Def.Input = 0;  // Basic Model / Historical Roster;
             Data->Def.Sound = Data->Def.Music = 1;
             MuteChannel(AV_ALL_CHANNELS, 0);
         }
@@ -394,10 +395,12 @@ void Prefs(int where, int player)
 
     while (1) {
         key = 0;
+        goto twoais;
         GetMouse();
 
         if (mousebuttons > 0 || key > 0) {  /* Gameplay */
             if (((x >= 245 && y >= 5 && x <= 314 && y <= 17) || key == K_ENTER) && !(hum1 == 1 && hum2 == 1)) {
+            gameplay:
                 InBox(245, 5, 314, 17);
                 WaitForMouseUp();
 
@@ -545,6 +548,7 @@ void Prefs(int where, int player)
 
             else if ((x >= 8 && y >= 77 && x <= 18 && y <= 85 && where == 0 && mousebuttons > 0) ||
                      (where == 0 && ksel == 0 && key == 'H')) {
+            twoais:
                 InBox(8, 77, 18, 85);
                 WaitForMouseUp();
                 hum1++;
@@ -565,6 +569,7 @@ void Prefs(int where, int player)
                 }
 
                 Levels(0, Data->Def.Lev1, 1, dctx);
+                goto gameplay;
             } else if ((x >= 8 && y >= 107 && x <= 81 && y <= 138 && (where == 0 || where == 3) && mousebuttons > 0) ||
                        ((where == 3 || where == 0) && ksel == 0 && key == 'G')) {
                 InBox(8, 107, 81, 138);

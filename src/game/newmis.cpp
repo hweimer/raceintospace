@@ -601,12 +601,12 @@ void AI_Begin(char plr)
     display::graphics.setForegroundColor(11);
     draw_string(60, 58, "COMPUTER TURN:  THINKING...");
     music_start(M_SOVTYP);
-    FadeIn(2, 10, 0, 0);
+    //    FadeIn(2, 10, 0, 0);
 }
 
 void AI_Done(void)
 {
     music_stop();
-    FadeOut(2, 10, 0, 0);
+    //    FadeOut(2, 10, 0, 0);
     display::graphics.screen()->clear();
 }

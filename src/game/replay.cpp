@@ -45,6 +45,7 @@ void
 Replay(char plr, int num, int dx, int dy, int width, int height,
        std::string Type)
 {
+    return;
     int keep_going;
     int i, j, kk, mode, max;
     int32_t offset;
