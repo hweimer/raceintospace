@@ -180,6 +180,7 @@ int RLED_img(const char *src_raw, char *dest_raw, unsigned int src_size,
  */
 void FadeIn(char wh, int steps, int val, char mode)
 {
+    return;
     int from = 0;
     int to = 256;
 
@@ -196,6 +197,7 @@ void FadeIn(char wh, int steps, int val, char mode)
 
 void FadeOut(char wh, int steps, int val, char mode)
 {
+    return;
     int from = 0;
     int to = 256;
 
@@ -307,7 +309,7 @@ void LMove(void *p)
 
 void randomize(void)
 {
-    srand(get_time() * 1000);
+    srand(0 * get_time() * 1000);
 }
 
 /** do nothing for a few seconds.

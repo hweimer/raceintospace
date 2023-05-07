@@ -875,6 +875,7 @@ void DestroyPad(char plr, char pad, int cost, char mode)
 void
 GetMouse(void)
 {
+    return;
     av_block();
     GetMouse_fast();
 }
