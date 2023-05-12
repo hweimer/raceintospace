@@ -18,6 +18,8 @@ if (MSVC)
   add_definitions(-D_CRT_SECURE_NO_DEPRECATE)
 else (MSVC)
   # add_definitions(-Werror=format -Werror=format-security)
+  add_definitions(-Wno-deprecated-declarations)
+  set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-fsanitize=undefined -fsanitize=address")
 endif (MSVC)
 
 set(game_sources
